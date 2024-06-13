@@ -6,18 +6,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration</title>
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="/newUsers.css">
 </head>
 <body>
 <div class="wrapper">
     <h2>Registration</h2>
-    <form action="#" th:action="@{/users}" th:object="${user}" method="post">
+    <form action="#" th:action="@{/users}" th:object="${user}" method="post" enctype="multipart/form-data">
         <div class="input-box">
             <p>Username: <input type="text" th:field="*{username}" required/></p>
         </div>
         <div class="input-box">
             <p>Password: <input type="password" th:field="*{password}" required/></p>
         </div>
+            <p>Photo: <input type="file" id="photo" name="photo" accept="image/*" /></p>
         <div class="policy">
             <input type="checkbox" required>
             <h3>I accept all terms & condition</h3>
