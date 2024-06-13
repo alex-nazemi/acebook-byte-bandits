@@ -3,6 +3,7 @@ package com.makersacademy.acebook.model.Controller.postTests;
 import com.github.javafaker.Faker;
 import com.makersacademy.acebook.model.User;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -62,7 +63,7 @@ public class PostsTest {
         assert postElement.isDisplayed();
 
     }
-    //Test to reset the post and check if it was reset successfully.//
+    //Test to reset the post and check if it was reset successfully.// //NEEDS REDOING
     @Test
     public void resetPost() {
         WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -71,13 +72,31 @@ public class PostsTest {
         //Click resetButton
         driver.findElement(By.id("reset-button")).click();
 
-
         //Check if the post was reset
         WebElement form = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='form-group']//input[contains(@name, 'commentText')]")));
         assert form.getText().isEmpty();
 
 
 
+
+    }
+
+    @Test
+    public void noContentInPostNoPostIsCreated() {
+        //Click submit button without entering content
+        driver.findElement(By.id("post-content-submit")).click();
+
+        // Add an explicit wait for the post to appear
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement postElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("p")));
+
+        //Check if the post was not created
+        //String postText = driver.findElement(By.tagName("p")).getText();
+        //assert!postText.contains("Hello this is a post");
+        String postText = postElement.getText();
+        System.out.println("Post text: " + postText);
+        postText = postText.trim();
+        Assert.assertEquals("", postText);
 
     }
 
