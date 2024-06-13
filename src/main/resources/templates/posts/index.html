@@ -54,7 +54,7 @@
             <input type="text" id="content" th:field="*{content}" class="form-control" required/>
         </div>
         <button type="submit" id="post-content-submit" class="btn btn-primary">Submit</button>
-        <button type="reset" class="btn btn-secondary">Reset</button>
+        <button type="reset" id="reset-button" class="btn btn-secondary">Reset</button>
     </form>
     <!-- POSTS LIKES-->
     <div class="post-container mt-4">
@@ -74,7 +74,7 @@
                             <input type="text" id="commentText" name="commentText" class="form-control"/>
                         </div>
                         <button type="submit" id="comment-submit-button" class="btn btn-primary">Submit Comment</button>
-                        <button type="reset" class="btn btn-secondary">Reset</button>
+                        <button type="reset" id="comment-reset-button" class="btn btn-secondary">Reset</button>
                     </form>
                     <!-- List comments if there are any -->
                     <div class="comment-container mt-2">

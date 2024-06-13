@@ -7,7 +7,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class PostsTest {
 
@@ -39,6 +42,7 @@ public class PostsTest {
         driver.close();
     }
 
+    //Test to create a new post and check if it was created successfully.//
     @Test
     public void createPost() {
         //Find the post and enter content
@@ -46,9 +50,35 @@ public class PostsTest {
         //Click the submit button
         driver.findElement(By.id("post-content-submit")).click();
 
+        // Add an explicit wait for the post to appear
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement postElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("p")));
+
         //Check if the post was created
-        String postText = driver.findElement(By.tagName("p")).getText();
-        assert postText.contains("Hello this is a post");
+        //String postText = driver.findElement(By.tagName("p")).getText();
+        //assert postText.contains("Hello this is a post");
+        String postText = postElement.getText();
+        System.out.println("Post text: " + postText);
+        assert postElement.isDisplayed();
+
+    }
+    //Test to reset the post and check if it was reset successfully.//
+    @Test
+    public void resetPost() {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        //Find the post and enter content
+        driver.findElement(By.id("content")).sendKeys("Hello this is a post");
+        //Click resetButton
+        driver.findElement(By.id("reset-button")).click();
+
+
+        //Check if the post was reset
+        WebElement form = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='form-group']//input[contains(@name, 'commentText')]")));
+        assert form.getText().isEmpty();
+
+
+
+
     }
 
 

@@ -24,7 +24,7 @@ public class NavigatesToLoginAfterUsersControllerTest {
         connection.setRequestMethod("GET");
 
         // Enable following redirects
-        connection.setInstanceFollowRedirects(false);
+        connection.setInstanceFollowRedirects(true);
 
         // Get the response code
         int responseCode = connection.getResponseCode();

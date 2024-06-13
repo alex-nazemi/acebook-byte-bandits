@@ -73,6 +73,23 @@ public class CommentsTest {
 
     }
 
+    @Test
+    public void resetComments() {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        //Find the comment and enter content
+        driver.findElement(By.id("content")).sendKeys("Hello this is a comment");
+        //Click resetButton
+        driver.findElement(By.id("comment-reset-button")).click();
+
+        //Check if the comment was reset
+        WebElement form = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='form-group']//input[contains(@name, 'commentText')]")));
+        assert form.getText().isEmpty();
+        System.out.println("Comments have been reset successfully");
+
+
+
+    }
+
 }
 
 
